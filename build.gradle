@@ -1,0 +1,97 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+//apply plugin: 'nexus'
+apply plugin: 'maven'
+
+group = 'org.gradle.api.plugins'
+version = '0.1'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.2'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    groovy localGroovy()
+    compile gradleApi()
+    compile 'com.cloudbees:cloudbees-api-client:1.4.0'
+    testCompile 'org.spockframework:spock-core:0.6-groovy-1.8'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle CloudBees plugin',
+                   'Implementation-Version': version,
+                   'Built-By': System.getProperty("user.name"),
+                   'Built-Date': new Date(),
+                   'Built-JDK': System.getProperty("java.version")
+    }
+}
+
+idea.project {
+    jdkName = '1.6'
+
+    ipr.withXml { provider ->
+        def node = provider.asNode()
+
+        // Use GIT
+        def vcsConfig = node.component.find { it.'@name' == 'VcsDirectoryMappings' }
+        vcsConfig.mapping[0].'@vcs' = 'Git'
+
+        // Set Gradle home
+        def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
+        gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir])
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.4'
+}
+/*
+modifyPom {
+    project {
+        name 'Gradle CloudBees plugin'
+        description 'Gradle plugin for managing applications and databases on CloudBees RUN@cloud.'
+        url 'https://github.com/bmuschko/gradle-cloudbees-plugin'
+        inceptionYear '2013'
+
+        scm {
+            url 'https://github.com/bmuschko/gradle-cloudbees-plugin'
+            connection 'scm:https://bmuschko@github.com/bmuschko/gradle-cloudbees-plugin.git'
+            developerConnection 'scm:git://github.com/bmuschko/gradle-cloudbees-plugin.git'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'bmuschko'
+                name 'Benjamin Muschko'
+                email 'benjamin.muschko@gmail.com'
+            }
+        }
+    }
+}*/
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "file://$projectDir/../repo")
+		}
+	}
+}
