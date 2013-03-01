@@ -26,21 +26,21 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppDelete extends CloudBeesTask {
-	@Input String appId
+    @Input String appId
 
-	CloudBeesAppDelete() {
-		super('Deletes an application.')
-	}
+    CloudBeesAppDelete() {
+        super('Deletes an application.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationDeleteResponse response = client.applicationDelete(getAppId())
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationDeleteResponse response = client.applicationDelete(getAppId())
 
-		if(response.deleted) {
-			logger.quiet "Application '${getAppId()}' was deleted successfully."
-		}
-		else {
-			logger.quiet "Failed to delete application '${getAppId()}'."
-		}
-	}
+        if(response.deleted) {
+            logger.quiet "Application '${getAppId()}' was deleted successfully."
+        }
+        else {
+            logger.quiet "Failed to delete application '${getAppId()}'."
+        }
+    }
 }

@@ -26,23 +26,23 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesDbInfo extends CloudBeesTask {
-	@Input String dbId
+    @Input String dbId
 
-	CloudBeesDbInfo() {
-		super('Returns information about connecting to a database.')
-	}
+    CloudBeesDbInfo() {
+        super('Returns information about connecting to a database.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		DatabaseInfo info = client.databaseInfo(getDbId(), true)
-		logger.quiet "Database Name: $info.name"
-		logger.quiet "      created: $info.created"
-		logger.quiet "        owner: $info.owner"
-		logger.quiet "     username: $info.username"
-		logger.quiet "     password: $info.password"
-		logger.quiet "       master: $info.master"
-		logger.quiet "         port: $info.port"
-		logger.quiet "       slaves: $info.slaves"
-		logger.quiet "       status: $info.status"
-	}
+    @Override
+    void executeAction(BeesClient client) {
+        DatabaseInfo info = client.databaseInfo(getDbId(), true)
+        logger.quiet "Database Name: $info.name"
+        logger.quiet "      created: $info.created"
+        logger.quiet "        owner: $info.owner"
+        logger.quiet "     username: $info.username"
+        logger.quiet "     password: $info.password"
+        logger.quiet "       master: $info.master"
+        logger.quiet "         port: $info.port"
+        logger.quiet "       slaves: $info.slaves"
+        logger.quiet "       status: $info.status"
+    }
 }

@@ -25,24 +25,24 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppList extends CloudBeesTask {
-	CloudBeesAppList() {
-		super('Returns the list of applications available to your account.') 
-	}
-	
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationListResponse response = client.applicationList()
-		def infos = response.applications
+    CloudBeesAppList() {
+        super('Returns the list of applications available to your account.')
+    }
 
-		if(infos.size() > 0) {
-			logger.quiet 'Application List:'
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationListResponse response = client.applicationList()
+        def infos = response.applications
 
-			infos.each { info ->
-				logger.quiet "    $info.title ($info.status)"
-			}
-		}
-		else {
-			logger.quiet 'No applications found.'
-		}
-	}
+        if(infos.size() > 0) {
+            logger.quiet 'Application List:'
+
+            infos.each { info ->
+                logger.quiet "    $info.title ($info.status)"
+            }
+        }
+        else {
+            logger.quiet 'No applications found.'
+        }
+    }
 }

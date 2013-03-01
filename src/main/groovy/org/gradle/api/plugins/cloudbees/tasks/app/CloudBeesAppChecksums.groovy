@@ -26,24 +26,24 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppChecksums extends CloudBeesTask {
-	@Input String appId
+    @Input String appId
 
-	CloudBeesAppChecksums() {
-		super('Returns the checksums for an application.')
-	}
+    CloudBeesAppChecksums() {
+        super('Returns the checksums for an application.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationCheckSumsResponse response = client.applicationCheckSums(getAppId())
-		logger.quiet "Application CheckSums for ${getAppId()}:"
-		Map<String, Long> checksums = response.checkSums
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationCheckSumsResponse response = client.applicationCheckSums(getAppId())
+        logger.quiet "Application CheckSums for ${getAppId()}:"
+        Map<String, Long> checksums = response.checkSums
 
-		checksums.each { key, value ->
-			logger.quiet "    ${value.toString()?.padLeft(10)} : $key"
-		}
+        checksums.each { key, value ->
+            logger.quiet "    ${value.toString()?.padLeft(10)} : $key"
+        }
 
-		if(!checksums){
-			logger.quiet "No checksums found. Is '${getAppId()}' a valid application?"
-		}
-	}
+        if(!checksums){
+            logger.quiet "No checksums found. Is '${getAppId()}' a valid application?"
+        }
+    }
 }

@@ -26,21 +26,21 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesDbList extends CloudBeesTask {
-	CloudBeesDbList() {
-		super('Returns a list of all the databases associated with your account.')
-	}
+    CloudBeesDbList() {
+        super('Returns a list of all the databases associated with your account.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		DatabaseListResponse response = client.databaseList()
-		List<DatabaseInfo> infos = response.databases
+    @Override
+    void executeAction(BeesClient client) {
+        DatabaseListResponse response = client.databaseList()
+        List<DatabaseInfo> infos = response.databases
 
-		infos.each { info ->
-			logger.quiet "    $info.name ($info.status)"
-		}
+        infos.each { info ->
+            logger.quiet "    $info.name ($info.status)"
+        }
 
-		if(!infos) {
-			logger.quiet "    No Databases found."
-		}
-	}
+        if(!infos) {
+            logger.quiet "    No Databases found."
+        }
+    }
 }

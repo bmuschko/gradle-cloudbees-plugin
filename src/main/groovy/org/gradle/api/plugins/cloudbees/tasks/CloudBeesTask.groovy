@@ -29,33 +29,33 @@ import org.gradle.api.tasks.TaskAction
  * @author Benjamin Muschko
  */
 abstract class CloudBeesTask extends DefaultTask {
-	@Input String apiFormat = DefaultApiConfig.FORMAT.value
-	@Input String apiVersion = DefaultApiConfig.VERSION.value
-	@Input String apiUrl = DefaultApiConfig.URL.value
-	@Input String apiKey
-	@Input String secret
+    @Input String apiFormat = DefaultApiConfig.FORMAT.value
+    @Input String apiVersion = DefaultApiConfig.VERSION.value
+    @Input String apiUrl = DefaultApiConfig.URL.value
+    @Input String apiKey
+    @Input String secret
 
-	CloudBeesTask(String description) {
-		this.description = description
-		group = 'CloudBees'
-	}
+    CloudBeesTask(String description) {
+        this.description = description
+        group = 'CloudBees'
+    }
 
-	@TaskAction
-	void start() {
-		withExceptionHandling {
-			BeesClient client = new BeesClient(getApiUrl(), getApiKey(), getSecret(), getApiFormat(), getApiVersion())
-			executeAction(client)
-		}
-	}
+    @TaskAction
+    void start() {
+        withExceptionHandling {
+            BeesClient client = new BeesClient(getApiUrl(), getApiKey(), getSecret(), getApiFormat(), getApiVersion())
+            executeAction(client)
+        }
+    }
 
-	private void withExceptionHandling(Closure c) {
-		try {
-			c()
-		}
-		catch(Exception e) {
-			throw new GradleException('Failed to executed CloudBees task', e)
-		}
-	}
+    private void withExceptionHandling(Closure c) {
+        try {
+            c()
+        }
+        catch(Exception e) {
+            throw new GradleException('Failed to executed CloudBees task', e)
+        }
+    }
 
-	abstract void executeAction(BeesClient client)
+    abstract void executeAction(BeesClient client)
 }

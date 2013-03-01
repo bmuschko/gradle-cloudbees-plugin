@@ -25,16 +25,16 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppTail extends CloudBeesTask {
-	@Input String appId
-	String log
+    @Input String appId
+    String log
 
-	CloudBeesAppTail() {
-		super('Establishes a persistent connection to the application logs.')
-	}
+    CloudBeesAppTail() {
+        super('Establishes a persistent connection to the application logs.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		log = log ?: 'server'
-		client.tailLog(getAppId(), log, System.out)
-	}
+    @Override
+    void executeAction(BeesClient client) {
+        log = log ?: 'server'
+        client.tailLog(getAppId(), log, System.out)
+    }
 }

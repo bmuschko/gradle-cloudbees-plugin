@@ -21,15 +21,15 @@ package org.gradle.api.plugins.cloudbees.api
  * @author Benjamin Muschko
  */
 enum DefaultApiConfig {
-	URL('https://api.cloudbees.com/api'), FORMAT('xml'), VERSION('1.0')
+    URL('https://api.cloudbees.com/api'), FORMAT('xml'), VERSION('1.0')
 
-	private final String value
+    private final String value
 
-	private DefaultApiConfig(String value) {
-		this.value = value
-	}
+    private DefaultApiConfig(String value) {
+        this.value = value
+    }
 
-	String getValue() {
-		value
-	}
+    String getValue() {
+        value
+    }
 }

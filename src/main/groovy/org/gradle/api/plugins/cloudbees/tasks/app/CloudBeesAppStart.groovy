@@ -26,21 +26,21 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppStart extends CloudBeesTask {
-	@Input String appId
+    @Input String appId
 
-	CloudBeesAppStart() {
-		super('Starts all deployed instances of an application.')
-	}
+    CloudBeesAppStart() {
+        super('Starts all deployed instances of an application.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationStatusResponse response = client.applicationStart(getAppId())
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationStatusResponse response = client.applicationStart(getAppId())
 
-		if(response.status == 'success') {
-			logger.quiet "Application '${getAppId()}' was started successfully."
-		}
-		else {
-			logger.quiet "Failed to start application '${getAppId()}'."
-		}
-	}
+        if(response.status == 'success') {
+            logger.quiet "Application '${getAppId()}' was started successfully."
+        }
+        else {
+            logger.quiet "Failed to start application '${getAppId()}'."
+        }
+    }
 }

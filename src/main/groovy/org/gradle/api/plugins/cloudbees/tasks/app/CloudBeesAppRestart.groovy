@@ -26,21 +26,21 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppRestart extends CloudBeesTask {
-	@Input String appId
+    @Input String appId
 
-	CloudBeesAppRestart() {
-		super('Restarts all deployed instances of an application.')
-	}
+    CloudBeesAppRestart() {
+        super('Restarts all deployed instances of an application.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationRestartResponse response = client.applicationRestart(getAppId())
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationRestartResponse response = client.applicationRestart(getAppId())
 
-		if(response.restarted) {
-			logger.quiet "Application '${getAppId()}' was restarted successfully."
-		}
-		else {
-			logger.quiet "Failed to restart application '${getAppId()}'."
-		}
-	}
+        if(response.restarted) {
+            logger.quiet "Application '${getAppId()}' was restarted successfully."
+        }
+        else {
+            logger.quiet "Failed to restart application '${getAppId()}'."
+        }
+    }
 }

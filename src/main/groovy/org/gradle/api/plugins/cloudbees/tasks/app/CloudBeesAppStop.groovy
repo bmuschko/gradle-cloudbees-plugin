@@ -26,21 +26,21 @@ import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
  * @author Benjamin Muschko
  */
 class CloudBeesAppStop extends CloudBeesTask {
-	@Input String appId
+    @Input String appId
 
-	CloudBeesAppStop() {
-		super('Stops all deployed instances of an application.')
-	}
+    CloudBeesAppStop() {
+        super('Stops all deployed instances of an application.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		ApplicationStatusResponse response = client.applicationStop(getAppId())
+    @Override
+    void executeAction(BeesClient client) {
+        ApplicationStatusResponse response = client.applicationStop(getAppId())
 
-		if(response.status == 'success') {
-			logger.quiet "Application '${getAppId()}' was stopped successfully."
-		}
-		else {
-			logger.quiet "Failed to stop application '${getAppId()}'."
-		}
-	}
+        if(response.status == 'success') {
+            logger.quiet "Application '${getAppId()}' was stopped successfully."
+        }
+        else {
+            logger.quiet "Failed to stop application '${getAppId()}'."
+        }
+    }
 }

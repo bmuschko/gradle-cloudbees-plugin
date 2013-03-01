@@ -21,11 +21,11 @@ package org.gradle.api.plugins.cloudbees
  * @author Benjamin Muschko
  */
 class CloudBeesPluginExtension {
-	String apiFormat
+    String apiFormat
     String apiVersion
-	String apiUrl
-	String apiKey
-	String secret
-	String appId
-	String dbId
+    String apiUrl
+    String apiKey
+    String secret
+    String appId
+    String dbId
 }

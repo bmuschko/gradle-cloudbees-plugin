@@ -26,21 +26,21 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesDbDrop extends CloudBeesTask {
-	@Input String dbId
+    @Input String dbId
 
-	CloudBeesDbDrop() {
-		super('Drops a database.')
-	}
+    CloudBeesDbDrop() {
+        super('Drops a database.')
+    }
 
-	@Override
-	void executeAction(BeesClient client) {
-		DatabaseDeleteResponse response = client.databaseDelete()
+    @Override
+    void executeAction(BeesClient client) {
+        DatabaseDeleteResponse response = client.databaseDelete()
 
-		if(response.deleted) {
-			logger.quiet "Database '${getDbId()}' was dropped successfully."
-		}
-		else {
-			logger.quiet "Failed to drop database '${getDbId()}'."
-		}
-	}
+        if(response.deleted) {
+            logger.quiet "Database '${getDbId()}' was dropped successfully."
+        }
+        else {
+            logger.quiet "Failed to drop database '${getDbId()}'."
+        }
+    }
 }
