@@ -15,6 +15,9 @@
  */
 package org.gradle.api.plugins.cloudbees
 
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.plugins.WarPlugin
 import org.gradle.api.plugins.cloudbees.api.DefaultApiConfig
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.plugins.cloudbees.tasks.app.*
@@ -22,9 +25,6 @@ import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbCreate
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbDrop
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbInfo
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbList
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.api.plugins.WarPlugin
 
 /**
  * CloudBees plugin for managing applications and databases on CloudBees RUN@cloud platform. The plugin hides the

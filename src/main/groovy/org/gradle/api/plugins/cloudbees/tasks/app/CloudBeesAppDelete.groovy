@@ -17,8 +17,8 @@ package org.gradle.api.plugins.cloudbees.tasks.app
 
 import com.cloudbees.api.ApplicationDeleteResponse
 import com.cloudbees.api.BeesClient
-import org.gradle.api.tasks.Input
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
+import org.gradle.api.tasks.Input
 
 /**
  * Deletes an application.
