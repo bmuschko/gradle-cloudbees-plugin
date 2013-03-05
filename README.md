@@ -2,7 +2,9 @@
 
 ![CloudBees Logo](https://jenkins-ci.org/sites/default/files/images/CloudBees-logo.thumbnail.png)
 
-The plugin provides support for managing applications and databases on  [CloudBees RUN@cloud](http://www.cloudbees.com/run.cb). Under covers the plugin communicates with the CloudBees backend via the [CloudBees API client](https://github.com/cloudbees/cloudbees-api-client). The code of the plugin is discussed in chapter 8 of the book ["Gradle in Action"](http://www.manning.com/muschko) published by Manning.
+The plugin provides support for managing applications and databases on  [CloudBees RUN@cloud](http://www.cloudbees.com/run.cb).
+Under covers the plugin communicates with the CloudBees backend via the [CloudBees API client](https://github.com/cloudbees/cloudbees-api-client).
+The code of the plugin is featured in chapter 8 of the book ["Gradle in Action"](http://www.manning.com/muschko) published by Manning.
 
 ## Usage
 
