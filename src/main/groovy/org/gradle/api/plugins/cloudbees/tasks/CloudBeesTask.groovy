@@ -17,9 +17,9 @@ package org.gradle.api.plugins.cloudbees.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
-import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
-import org.gradle.api.plugins.cloudbees.api.CloudBeesHttpApiClient
-import org.gradle.api.plugins.cloudbees.api.DefaultApiConfig
+import org.gradle.api.plugins.cloudbees.client.CloudBeesClient
+import org.gradle.api.plugins.cloudbees.client.CloudBeesHttpApiClient
+import org.gradle.api.plugins.cloudbees.client.DefaultHttpApiConfig
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
@@ -30,9 +30,9 @@ import org.gradle.api.tasks.TaskAction
  * @author Benjamin Muschko
  */
 abstract class CloudBeesTask extends DefaultTask {
-    @Input String apiFormat = DefaultApiConfig.FORMAT.value
-    @Input String apiVersion = DefaultApiConfig.VERSION.value
-    @Input String apiUrl = DefaultApiConfig.URL.value
+    @Input String apiFormat = DefaultHttpApiConfig.FORMAT.value
+    @Input String apiVersion = DefaultHttpApiConfig.VERSION.value
+    @Input String apiUrl = DefaultHttpApiConfig.URL.value
     @Input String apiKey
     @Input String secret
     CloudBeesClient client

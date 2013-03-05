@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gradle.api.plugins.cloudbees.api
+package org.gradle.api.plugins.cloudbees.client
 
 /**
  * Default CloudBees API configuration.
  *
  * @author Benjamin Muschko
  */
-enum DefaultApiConfig {
+enum DefaultHttpApiConfig {
     URL('https://api.cloudbees.com/api'), FORMAT('xml'), VERSION('1.0')
 
     private final String value
 
-    private DefaultApiConfig(String value) {
+    private DefaultHttpApiConfig(String value) {
         this.value = value
     }
 

@@ -18,7 +18,7 @@ package org.gradle.api.plugins.cloudbees
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.WarPlugin
-import org.gradle.api.plugins.cloudbees.api.DefaultApiConfig
+import org.gradle.api.plugins.cloudbees.client.DefaultHttpApiConfig
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.plugins.cloudbees.tasks.app.*
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbCreate
@@ -62,9 +62,9 @@ class CloudBeesPlugin implements Plugin<Project> {
     private void configureParentTask(Project project) {
         project.tasks.withType(CloudBeesTask).whenTaskAdded { CloudBeesTask task ->
             def extension = project.extensions.findByName(EXTENSION_NAME)
-            task.conventionMapping.apiFormat = { extension.apiFormat ?: DefaultApiConfig.FORMAT.value }
-            task.conventionMapping.apiVersion = { extension.apiVersion ?: DefaultApiConfig.VERSION.value }
-            task.conventionMapping.apiUrl = { extension.apiUrl ?: DefaultApiConfig.URL.value }
+            task.conventionMapping.apiFormat = { extension.apiFormat ?: DefaultHttpApiConfig.FORMAT.value }
+            task.conventionMapping.apiVersion = { extension.apiVersion ?: DefaultHttpApiConfig.VERSION.value }
+            task.conventionMapping.apiUrl = { extension.apiUrl ?: DefaultHttpApiConfig.URL.value }
             task.conventionMapping.apiKey = { getApiKey(project) }
             task.conventionMapping.secret = { getApiSecret(project) }
         }

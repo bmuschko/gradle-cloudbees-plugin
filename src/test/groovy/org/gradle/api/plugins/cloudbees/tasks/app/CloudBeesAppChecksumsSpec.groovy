@@ -19,7 +19,7 @@ import com.cloudbees.api.ApplicationCheckSumsResponse
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
+import org.gradle.api.plugins.cloudbees.client.CloudBeesClient
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 

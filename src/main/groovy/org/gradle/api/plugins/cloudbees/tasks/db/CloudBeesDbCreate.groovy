@@ -16,7 +16,7 @@
 package org.gradle.api.plugins.cloudbees.tasks.db
 
 import com.cloudbees.api.DatabaseCreateResponse
-import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
+import org.gradle.api.plugins.cloudbees.client.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
