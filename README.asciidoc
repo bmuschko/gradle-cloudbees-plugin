@@ -1,0 +1,95 @@
+Gradle CloudBees plugin
+=======================
+
+image:https://jenkins-ci.org/sites/default/files/images/CloudBees-logo.thumbnail.png["CloudBees Logo"]
+
+The plugin provides support for managing applications and databases on link:http://www.cloudbees.com/run.cb["CloudBees RUN@cloud"].
+Under covers the plugin communicates with the CloudBees backend via the link:https://github.com/cloudbees/cloudbees-api-client["CloudBees API client"].
+The code of the plugin is featured in chapter 8 of the book link:http://www.manning.com/muschko["Gradle in Action"] published by Manning.
+
+== Usage
+
+To use the CloudBees plugin, include in your build script:
+
+[source,groovy]
+----
+apply plugin: 'cloudbees'
+----
+
+The plugin JAR needs to be defined in the classpath of your build script. It is directly available on
+link:http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.gradle.api.plugins%22%20AND%20a%3A%22gradle-cloudbees-plugin%22["Maven Central"].
+Alternatively, you can download it from GitHub and deploy it to your local repository. The following code snippet shows an
+example on how to retrieve it from Maven Central:
+
+[source,groovy]
+----
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+       classpath 'org.gradle.api.plugins:gradle-cloudbees-plugin:0.1'
+    }
+}
+----
+
+== Tasks
+
+The CloudBees plugin defines the following tasks:
+
+=== Application tasks
+
+* `cloudBeesAppChecksums`:
+* `cloudBeesAppDelete`: 
+* `cloudBeesAppDeployWar`:
+* `cloudBeesAppInfo`:
+* `cloudBeesAppList`:
+* `cloudBeesAppRestart`:
+* `cloudBeesAppStart`:
+* `cloudBeesAppStop`:
+* `cloudBeesAppTail`:
+
+=== Database tasks
+
+* `cloudBeesDbInfo`:
+* `cloudBeesDbList`: 
+* `cloudBeesDbDrop`:
+* `cloudBeesDbCreate`:
+
+== Convention properties
+
+The CloudBees plugin defines the following convention properties in the `cloudBees` closure:
+
+[options="header"]
+|=======
+|Property name |Type |Default value |Description
+|apiFormat |String |XML |The CloudBees API format.
+|apiVersion |String |1.0 |The CloudBees API version.
+|apiUrl |String |https://api.cloudbees.com/api |The CloudBees API URL.
+|apiKey |String |value of property named `cloudbees.api.key` |The CloudBees API key.
+|secret |String |value of property named `cloudbees.api.secret` |The CloudBees API secret.
+|appId |String |Not null |The application identifier on CloudBees.
+|dbId |String |Not null |The database identifier on CloudBees.
+|=======
+
+=== Example
+
+[source,groovy]
+----
+cloudBees {
+    appId = 'gradle-in-action/to-do-app'
+    dbId = 'gradle-in-action/to-do-db'
+}
+----
+
+== Setting API credentials
+
+If you decide to use the properties `cloudbees.api.key` and `cloudbees.api.secret` to populate your API credentials it
+is recommended to set them in your `~/.gradle/gradle.properties` file. The following code snippet shows an example:
+
+[source,groovy]
+----
+cloudbees.api.key = yourApiKey
+cloudbees.api.secret = yourApiSecret
+----
