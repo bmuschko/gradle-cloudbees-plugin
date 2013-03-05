@@ -16,7 +16,7 @@ apply plugin: 'cloudbees'
 ----
 
 The plugin JAR needs to be defined in the classpath of your build script. It is directly available on
-link:http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.gradle.api.plugins%22%20AND%20a%3A%22gradle-cloudbees-plugin%22["Maven Central"].
+link:http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.gradle.api.plugins%22%20AND%20a%3A%22gradle-cloudbees-plugin%22[Maven Central].
 Alternatively, you can download it from GitHub and deploy it to your local repository. The following code snippet shows an
 example on how to retrieve it from Maven Central:
 
@@ -42,7 +42,7 @@ The CloudBees plugin defines the following tasks:
 [options="header"]
 |=======
 |Task name |Depends on |Type |Description
-|`cloudBeesAppChecksums` |- |`CloudBeesAppChecksums` |Returns the checksums for an application.
+|+cloudBeesAppChecksums+ |- |+CloudBeesAppChecksums+ |Returns the checksums for an application.
 |`cloudBeesAppDelete` |- |`CloudBeesAppDelete` |Deletes an application.
 |`cloudBeesAppDeployWar` |- |`CloudBeesAppDeployWar` |Deploys a new version of an application using a WAR file.
 |`cloudBeesAppInfo` |- |`CloudBeesAppInfo` |Returns the basic information about an application.
