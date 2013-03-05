@@ -16,7 +16,7 @@
 package org.gradle.api.plugins.cloudbees.tasks.app
 
 import com.cloudbees.api.ApplicationRestartResponse
-import com.cloudbees.api.BeesClient
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
@@ -33,7 +33,7 @@ class CloudBeesAppRestart extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         ApplicationRestartResponse response = client.applicationRestart(getAppId())
 
         if(response.restarted) {

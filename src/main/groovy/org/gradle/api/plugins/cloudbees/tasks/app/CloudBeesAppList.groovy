@@ -16,7 +16,7 @@
 package org.gradle.api.plugins.cloudbees.tasks.app
 
 import com.cloudbees.api.ApplicationListResponse
-import com.cloudbees.api.BeesClient
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 
 /**
@@ -30,7 +30,7 @@ class CloudBeesAppList extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         ApplicationListResponse response = client.applicationList()
         def infos = response.applications
 

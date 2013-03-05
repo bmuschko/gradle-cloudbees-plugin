@@ -15,7 +15,8 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.app
 
-import com.cloudbees.api.ApplicationInfo
+import com.cloudbees.api.ApplicationDeployArchiveResponse
+import com.cloudbees.api.UploadProgress
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -24,12 +25,12 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Specification for CloudBees application information task.
+ * Specification for CloudBees application WAR deployment task.
  *
  * @author Benjamin Muschko
  */
-class CloudBeesAppInfoSpec extends Specification {
-    static final TASK_NAME = 'cloudBeesAppInfo'
+class CloudBeesAppDeployWarSpec extends Specification {
+    static final TASK_NAME = 'cloudBeesAppDeployWar'
     Project project
     CloudBeesClient mockClient
 
@@ -42,8 +43,10 @@ class CloudBeesAppInfoSpec extends Specification {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
+            Task task = project.task(TASK_NAME, type: CloudBeesAppDeployWar) {
                 appId = 'gradle-in-action/todo'
+                environment = 'prod'
+                warFile = new File('todo.war')
                 apiKey = 'myKey'
                 secret = 'mySecret'
             }
@@ -52,7 +55,7 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            mockClient.applicationInfo('gradle-in-action/todo') >> { throw new RuntimeException() }
+            mockClient.applicationDeployWar('gradle-in-action/todo', 'prod', null, new File('todo.war'), null, _ as UploadProgress) >> { throw new RuntimeException() }
             thrown(GradleException)
     }
 
@@ -60,8 +63,10 @@ class CloudBeesAppInfoSpec extends Specification {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
+            Task task = project.task(TASK_NAME, type: CloudBeesAppDeployWar) {
                 appId = 'gradle-in-action/todo'
+                environment = 'prod'
+                warFile = new File('todo.war')
                 apiKey = 'myKey'
                 secret = 'mySecret'
             }
@@ -70,6 +75,6 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            1 * mockClient.applicationInfo('gradle-in-action/todo') >> new ApplicationInfo('123', 'MyApp', new Date(), 'hibernate', ['http://cloudbees.gradle-in-action.com/todo'] as String[])
+            1 * mockClient.applicationDeployWar('gradle-in-action/todo', 'prod', null, new File('todo.war'), null, _ as UploadProgress) >> new ApplicationDeployArchiveResponse()
     }
 }

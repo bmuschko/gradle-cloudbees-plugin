@@ -16,7 +16,7 @@
 package org.gradle.api.plugins.cloudbees.tasks.app
 
 import com.cloudbees.api.ApplicationCheckSumsResponse
-import com.cloudbees.api.BeesClient
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
@@ -33,7 +33,7 @@ class CloudBeesAppChecksums extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         ApplicationCheckSumsResponse response = client.applicationCheckSums(getAppId())
         logger.quiet "Application CheckSums for ${getAppId()}:"
         Map<String, Long> checksums = response.checkSums

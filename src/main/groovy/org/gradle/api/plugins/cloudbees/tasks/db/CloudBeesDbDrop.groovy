@@ -15,8 +15,8 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.db
 
-import com.cloudbees.api.BeesClient
 import com.cloudbees.api.DatabaseDeleteResponse
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
@@ -33,8 +33,8 @@ class CloudBeesDbDrop extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
-        DatabaseDeleteResponse response = client.databaseDelete()
+    void executeAction(CloudBeesClient client) {
+        DatabaseDeleteResponse response = client.databaseDelete(getDbId())
 
         if(response.deleted) {
             logger.quiet "Database '${getDbId()}' was dropped successfully."

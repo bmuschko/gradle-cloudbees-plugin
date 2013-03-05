@@ -15,7 +15,7 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.app
 
-import com.cloudbees.api.ApplicationInfo
+import com.cloudbees.api.ApplicationStatusResponse
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -24,12 +24,12 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Specification for CloudBees application information task.
+ * Specification for CloudBees application start task.
  *
  * @author Benjamin Muschko
  */
-class CloudBeesAppInfoSpec extends Specification {
-    static final TASK_NAME = 'cloudBeesAppInfo'
+class CloudBeesAppStartSpec extends Specification {
+    static final TASK_NAME = 'cloudBeesAppStart'
     Project project
     CloudBeesClient mockClient
 
@@ -42,7 +42,7 @@ class CloudBeesAppInfoSpec extends Specification {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
+            Task task = project.task(TASK_NAME, type: CloudBeesAppStart) {
                 appId = 'gradle-in-action/todo'
                 apiKey = 'myKey'
                 secret = 'mySecret'
@@ -52,15 +52,15 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            mockClient.applicationInfo('gradle-in-action/todo') >> { throw new RuntimeException() }
+            mockClient.applicationStart('gradle-in-action/todo') >> { throw new RuntimeException() }
             thrown(GradleException)
     }
 
-    def "Executes task for success"() {
+    def "Executes task for success with database restart"() {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
+            Task task = project.task(TASK_NAME, type: CloudBeesAppStart) {
                 appId = 'gradle-in-action/todo'
                 apiKey = 'myKey'
                 secret = 'mySecret'
@@ -70,6 +70,23 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            1 * mockClient.applicationInfo('gradle-in-action/todo') >> new ApplicationInfo('123', 'MyApp', new Date(), 'hibernate', ['http://cloudbees.gradle-in-action.com/todo'] as String[])
+            1 * mockClient.applicationStart('gradle-in-action/todo') >> new ApplicationStatusResponse('success')
+    }
+
+    def "Executes task for success with failed database restart"() {
+        expect:
+            project.tasks.findByName(TASK_NAME) == null
+        when:
+            Task task = project.task(TASK_NAME, type: CloudBeesAppStart) {
+                appId = 'gradle-in-action/todo'
+                apiKey = 'myKey'
+                secret = 'mySecret'
+            }
+
+            task.client = mockClient
+            task.start()
+        then:
+            project.tasks.findByName(TASK_NAME) != null
+            1 * mockClient.applicationStart('gradle-in-action/todo') >> new ApplicationStatusResponse('failure')
     }
 }

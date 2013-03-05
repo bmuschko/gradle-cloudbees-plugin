@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gradle.api.plugins.cloudbees.tasks.app
+package org.gradle.api.plugins.cloudbees.tasks.db
 
-import com.cloudbees.api.ApplicationInfo
+import com.cloudbees.api.DatabaseCreateResponse
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -24,12 +24,12 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Specification for CloudBees application information task.
+ * Specification for CloudBees database creation task.
  *
  * @author Benjamin Muschko
  */
-class CloudBeesAppInfoSpec extends Specification {
-    static final TASK_NAME = 'cloudBeesAppInfo'
+class CloudBeesDbCreateSpec extends Specification {
+    static final TASK_NAME = 'cloudBeesDbCreate'
     Project project
     CloudBeesClient mockClient
 
@@ -42,8 +42,11 @@ class CloudBeesAppInfoSpec extends Specification {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
-                appId = 'gradle-in-action/todo'
+            Task task = project.task(TASK_NAME, type: CloudBeesDbCreate) {
+                dbId = 'gradle-in-action/tododb'
+                username = 'myUser'
+                password = 'myPassword'
+                account = 'myAccount'
                 apiKey = 'myKey'
                 secret = 'mySecret'
             }
@@ -52,7 +55,7 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            mockClient.applicationInfo('gradle-in-action/todo') >> { throw new RuntimeException() }
+            mockClient.databaseCreate('myAccount', 'gradle-in-action/tododb', 'myUser', 'myPassword') >> { throw new RuntimeException() }
             thrown(GradleException)
     }
 
@@ -60,8 +63,11 @@ class CloudBeesAppInfoSpec extends Specification {
         expect:
             project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: CloudBeesAppInfo) {
-                appId = 'gradle-in-action/todo'
+            Task task = project.task(TASK_NAME, type: CloudBeesDbCreate) {
+                dbId = 'gradle-in-action/tododb'
+                username = 'myUser'
+                password = 'myPassword'
+                account = 'myAccount'
                 apiKey = 'myKey'
                 secret = 'mySecret'
             }
@@ -70,6 +76,6 @@ class CloudBeesAppInfoSpec extends Specification {
             task.start()
         then:
             project.tasks.findByName(TASK_NAME) != null
-            1 * mockClient.applicationInfo('gradle-in-action/todo') >> new ApplicationInfo('123', 'MyApp', new Date(), 'hibernate', ['http://cloudbees.gradle-in-action.com/todo'] as String[])
+            1 * mockClient.databaseCreate('myAccount', 'gradle-in-action/tododb', 'myUser', 'myPassword') >> new DatabaseCreateResponse('gradle-in-action/tododb')
     }
 }

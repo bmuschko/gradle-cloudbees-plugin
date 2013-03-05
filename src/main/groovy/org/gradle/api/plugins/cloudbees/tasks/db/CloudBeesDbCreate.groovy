@@ -15,8 +15,8 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.db
 
-import com.cloudbees.api.BeesClient
 import com.cloudbees.api.DatabaseCreateResponse
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
@@ -36,7 +36,7 @@ class CloudBeesDbCreate extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         DatabaseCreateResponse response = client.databaseCreate(getAccount(), getDbId(), getUsername(), getPassword())
 
         if(response.databaseId) {

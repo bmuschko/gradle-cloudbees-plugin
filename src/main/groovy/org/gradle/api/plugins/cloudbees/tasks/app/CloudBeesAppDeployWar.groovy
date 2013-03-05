@@ -16,7 +16,8 @@
 package org.gradle.api.plugins.cloudbees.tasks.app
 
 import com.cloudbees.api.ApplicationDeployArchiveResponse
-import com.cloudbees.api.BeesClient
+import com.cloudbees.api.HashWriteProgress
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
@@ -29,17 +30,19 @@ import org.gradle.api.tasks.Optional
  */
 class CloudBeesAppDeployWar extends CloudBeesTask {
     @Input String appId
+    @Input String environment
     @Input @Optional String message
     @InputFile File warFile
+    @InputFile @Optional File srcFile
 
     CloudBeesAppDeployWar() {
         super('Deploys a new version of an application using a WAR file.')
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         logger.quiet "Deploying WAR '${getWarFile()}' to application ID '${getAppId()}' with message '${getMessage()}'"
-        ApplicationDeployArchiveResponse response = client.applicationDeployWar(getAppId(), null, getMessage(), getWarFile(), null, null)
+        ApplicationDeployArchiveResponse response = client.applicationDeployWar(getAppId(), getEnvironment(), getMessage(), getWarFile(), getSrcFile(), new HashWriteProgress())
         logger.quiet "Application uploaded successfully to: $response.url"
     }
 }

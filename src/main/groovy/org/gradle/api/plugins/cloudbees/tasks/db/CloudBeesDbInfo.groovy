@@ -15,8 +15,8 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.db
 
-import com.cloudbees.api.BeesClient
 import com.cloudbees.api.DatabaseInfo
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.tasks.Input
 
@@ -33,7 +33,7 @@ class CloudBeesDbInfo extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         DatabaseInfo info = client.databaseInfo(getDbId(), true)
         logger.quiet "Database Name: $info.name"
         logger.quiet "      created: $info.created"

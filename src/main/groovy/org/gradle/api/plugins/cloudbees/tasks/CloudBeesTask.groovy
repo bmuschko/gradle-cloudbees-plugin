@@ -15,9 +15,10 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks
 
-import com.cloudbees.api.BeesClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
+import org.gradle.api.plugins.cloudbees.api.CloudBeesHttpApiClient
 import org.gradle.api.plugins.cloudbees.api.DefaultApiConfig
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
@@ -34,16 +35,17 @@ abstract class CloudBeesTask extends DefaultTask {
     @Input String apiUrl = DefaultApiConfig.URL.value
     @Input String apiKey
     @Input String secret
+    CloudBeesClient client
 
     CloudBeesTask(String description) {
         this.description = description
         group = 'CloudBees'
+        client = new CloudBeesHttpApiClient(getApiUrl(), getApiKey(), getSecret(), getApiFormat(), getApiVersion())
     }
 
     @TaskAction
     void start() {
         withExceptionHandling {
-            BeesClient client = new BeesClient(getApiUrl(), getApiKey(), getSecret(), getApiFormat(), getApiVersion())
             executeAction(client)
         }
     }
@@ -57,5 +59,5 @@ abstract class CloudBeesTask extends DefaultTask {
         }
     }
 
-    abstract void executeAction(BeesClient client)
+    abstract void executeAction(CloudBeesClient client)
 }

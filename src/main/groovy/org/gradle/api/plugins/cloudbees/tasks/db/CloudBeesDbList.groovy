@@ -15,9 +15,9 @@
  */
 package org.gradle.api.plugins.cloudbees.tasks.db
 
-import com.cloudbees.api.BeesClient
 import com.cloudbees.api.DatabaseInfo
 import com.cloudbees.api.DatabaseListResponse
+import org.gradle.api.plugins.cloudbees.api.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 
 /**
@@ -31,7 +31,7 @@ class CloudBeesDbList extends CloudBeesTask {
     }
 
     @Override
-    void executeAction(BeesClient client) {
+    void executeAction(CloudBeesClient client) {
         DatabaseListResponse response = client.databaseList()
         List<DatabaseInfo> infos = response.databases
 
