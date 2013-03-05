@@ -1,4 +1,5 @@
-= Gradle CloudBees plugin
+Gradle CloudBees plugin
+=======================
 
 image:https://jenkins-ci.org/sites/default/files/images/CloudBees-logo.thumbnail.png[CloudBees Logo]
 
@@ -42,7 +43,7 @@ The CloudBees plugin defines the following tasks:
 [options="header"]
 |=======
 |Task name |Depends on |Type |Description
-|+cloudBeesAppChecksums+ |- |+CloudBeesAppChecksums+ |Returns the checksums for an application.
+|`cloudBeesAppChecksums` |- |`CloudBeesAppChecksums` |Returns the checksums for an application.
 |`cloudBeesAppDelete` |- |`CloudBeesAppDelete` |Deletes an application.
 |`cloudBeesAppDeployWar` |- |`CloudBeesAppDeployWar` |Deploys a new version of an application using a WAR file.
 |`cloudBeesAppInfo` |- |`CloudBeesAppInfo` |Returns the basic information about an application.
