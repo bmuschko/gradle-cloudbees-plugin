@@ -66,9 +66,9 @@ The CloudBees plugin defines the following tasks:
 |`cloudBeesDbList`   |-          |`CloudBeesDbList`   |Returns a list of all the databases associated with your account.
 |=======
 
-== Convention properties
+== Extension properties
 
-The CloudBees plugin defines the following convention properties in the `cloudBees` closure:
+The CloudBees plugin defines the following extension properties in the `cloudBees` closure:
 
 [options="header"]
 |=======
