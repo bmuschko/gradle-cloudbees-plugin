@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesDbInfo extends CloudBeesTask {
-    @Input String dbId
+    /**
+     * Database identifier.
+     */
+    @Input
+    String dbId
 
     CloudBeesDbInfo() {
         super('Returns information about connecting to a database.')

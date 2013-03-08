@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppStart extends CloudBeesTask {
-    @Input String appId
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
 
     CloudBeesAppStart() {
         super('Starts all deployed instances of an application.')

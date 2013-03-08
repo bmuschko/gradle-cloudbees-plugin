@@ -15,17 +15,46 @@
  */
 package org.gradle.api.plugins.cloudbees
 
+import org.gradle.api.plugins.cloudbees.client.DefaultHttpApiConfig
+
 /**
  * CloudBees plugin extension model.
  *
  * @author Benjamin Muschko
  */
 class CloudBeesPluginExtension {
-    String apiFormat
-    String apiVersion
-    String apiUrl
+    /**
+     * CloudBees API format. Defaults to "xml" if not set.
+     */
+    String apiFormat = DefaultHttpApiConfig.FORMAT.value
+
+    /**
+     * CloudBees API version. Defaults to "1.0" if not set.
+     */
+    String apiVersion = DefaultHttpApiConfig.VERSION.value
+
+    /**
+     * CloudBees API URL. Defaults to "https://api.cloudbees.com/api" if not set.
+     */
+    String apiUrl = DefaultHttpApiConfig.URL.value
+
+    /**
+     * CloudBees API key.
+     */
     String apiKey
-    String secret
+
+    /**
+     * CloudBees API secret.
+     */
+    String apiSecret
+
+    /**
+     * Application identifier.
+     */
     String appId
+
+    /**
+     * Database identifier.
+     */
     String dbId
 }

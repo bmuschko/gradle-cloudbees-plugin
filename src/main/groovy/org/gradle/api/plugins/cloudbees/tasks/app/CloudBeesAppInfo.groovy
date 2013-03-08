@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppInfo extends CloudBeesTask {
-    @Input String appId
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
 
     CloudBeesAppInfo() {
         super('Returns the basic information about an application.')

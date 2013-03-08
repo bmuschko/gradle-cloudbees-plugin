@@ -30,17 +30,42 @@ import org.gradle.api.tasks.TaskAction
  * @author Benjamin Muschko
  */
 abstract class CloudBeesTask extends DefaultTask {
-    @Input String apiFormat = DefaultHttpApiConfig.FORMAT.value
-    @Input String apiVersion = DefaultHttpApiConfig.VERSION.value
-    @Input String apiUrl = DefaultHttpApiConfig.URL.value
-    @Input String apiKey
-    @Input String secret
+    /**
+     * CloudBees API format. Defaults to "xml" if not set.
+     */
+    @Input
+    String apiFormat = DefaultHttpApiConfig.FORMAT.value
+
+    /**
+     * CloudBees API version. Defaults to "1.0" if not set.
+     */
+    @Input
+    String apiVersion = DefaultHttpApiConfig.VERSION.value
+
+    /**
+     * CloudBees API URL. Defaults to "https://api.cloudbees.com/api" if not set.
+     */
+    @Input
+    String apiUrl = DefaultHttpApiConfig.URL.value
+
+    /**
+     * CloudBees API key.
+     */
+    @Input
+    String apiKey
+
+    /**
+     * CloudBees API secret.
+     */
+    @Input
+    String apiSecret
+
     CloudBeesClient client
 
     CloudBeesTask(String description) {
         this.description = description
         group = 'CloudBees'
-        client = new CloudBeesHttpApiClient(getApiUrl(), getApiKey(), getSecret(), getApiFormat(), getApiVersion())
+        client = new CloudBeesHttpApiClient(getApiUrl(), getApiKey(), getApiSecret(), getApiFormat(), getApiVersion())
     }
 
     @TaskAction

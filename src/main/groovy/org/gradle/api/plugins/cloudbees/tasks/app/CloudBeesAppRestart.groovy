@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppRestart extends CloudBeesTask {
-    @Input String appId
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
 
     CloudBeesAppRestart() {
         super('Restarts all deployed instances of an application.')

@@ -26,8 +26,18 @@ import org.gradle.api.tasks.Optional
  * @author Benjamin Muschko
  */
 class CloudBeesAppTail extends CloudBeesTask {
-    @Input String appId
-    @Input @Optional String log
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
+
+    /**
+     * Log to tail. Defaults to "server" if not set.
+     */
+    @Input
+    @Optional
+    String log
 
     CloudBeesAppTail() {
         super('Establishes a persistent connection to the application logs.')

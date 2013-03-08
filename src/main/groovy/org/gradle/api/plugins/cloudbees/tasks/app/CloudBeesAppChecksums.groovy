@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppChecksums extends CloudBeesTask {
-    @Input String appId
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
 
     CloudBeesAppChecksums() {
         super('Returns the checksums for an application.')

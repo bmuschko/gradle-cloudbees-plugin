@@ -26,10 +26,29 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesDbCreate extends CloudBeesTask {
-    @Input String dbId
-    @Input String username
-    @Input String password
-    @Input String account
+    /**
+     * Database identifier.
+     */
+    @Input
+    String dbId
+
+    /**
+     * Database username.
+     */
+    @Input
+    String username
+
+    /**
+     * Database password.
+     */
+    @Input
+    String password
+
+    /**
+     * Account used for database creation.
+     */
+    @Input
+    String account
 
     CloudBeesDbCreate() {
         super('Creates a new database.')

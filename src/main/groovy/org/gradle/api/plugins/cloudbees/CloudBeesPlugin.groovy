@@ -25,6 +25,7 @@ import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbCreate
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbDrop
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbInfo
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbList
+import org.gradle.plugins.ear.EarPlugin
 
 /**
  * CloudBees plugin for managing applications and databases on CloudBees RUN@cloud platform. The plugin hides the
@@ -38,7 +39,6 @@ class CloudBeesPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.plugins.apply(WarPlugin)
         project.extensions.create(EXTENSION_NAME, CloudBeesPluginExtension)
         addTasks(project)
     }
@@ -62,11 +62,11 @@ class CloudBeesPlugin implements Plugin<Project> {
     private void configureParentTask(Project project) {
         project.tasks.withType(CloudBeesTask).whenTaskAdded { CloudBeesTask task ->
             def extension = project.extensions.findByName(EXTENSION_NAME)
-            task.conventionMapping.apiFormat = { extension.apiFormat ?: DefaultHttpApiConfig.FORMAT.value }
-            task.conventionMapping.apiVersion = { extension.apiVersion ?: DefaultHttpApiConfig.VERSION.value }
-            task.conventionMapping.apiUrl = { extension.apiUrl ?: DefaultHttpApiConfig.URL.value }
+            task.conventionMapping.apiFormat = { extension.apiFormat }
+            task.conventionMapping.apiVersion = { extension.apiVersion }
+            task.conventionMapping.apiUrl = { extension.apiUrl }
             task.conventionMapping.apiKey = { getApiKey(project) }
-            task.conventionMapping.secret = { getApiSecret(project) }
+            task.conventionMapping.apiSecret = { getApiSecret(project) }
         }
     }
 
@@ -87,6 +87,14 @@ class CloudBeesPlugin implements Plugin<Project> {
         }
 
         project.task('cloudBeesAppDelete', type: CloudBeesAppDelete)
+
+        project.tasks.withType(CloudBeesAppDeployEar).whenTaskAdded { task ->
+            task.conventionMapping.appId = { getAppId(project) }
+            task.conventionMapping.message = { project.hasProperty('message') ? project.message : null }
+            task.conventionMapping.earFile = { getEarFile(project) }
+        }
+
+        project.task('cloudBeesAppDeployEar', type: CloudBeesAppDeployEar)
 
         project.tasks.withType(CloudBeesAppDeployWar).whenTaskAdded { task ->
             task.conventionMapping.appId = { getAppId(project) }
@@ -177,7 +185,7 @@ class CloudBeesPlugin implements Plugin<Project> {
      * @return API key
      */
     private String getApiSecret(Project project) {
-        project.hasProperty('cloudbees.api.secret') ? project.property('cloudbees.api.secret') : project.extensions.findByName(EXTENSION_NAME).secret
+        project.hasProperty('cloudbees.api.secret') ? project.property('cloudbees.api.secret') : project.extensions.findByName(EXTENSION_NAME).apiSecret
     }
 
     /**
@@ -203,6 +211,27 @@ class CloudBeesPlugin implements Plugin<Project> {
     }
 
     /**
+     * Gets EAR archive path from project property "earFile". If the property doesn't exist
+     * the web module's archive path is used.
+     *
+     * @param project
+     * @return EAR file
+     */
+    private File getEarFile(Project project) {
+        project.hasProperty('earFile') ? new File(project.property('earFile')) : getEarPluginArchive(project)
+    }
+
+    /**
+     * Gets the project's EAR file if War plugin is applied; otherwise return null.
+     *
+     * @param project Project
+     * @return EAR file
+     */
+    private File getEarPluginArchive(Project project) {
+        project.plugins.hasPlugin(EarPlugin) ? project.tasks.getByName(EarPlugin.EAR_TASK_NAME).archivePath : null
+    }
+
+    /**
      * Gets WAR archive path from project property "warFile". If the property doesn't exist
      * the web module's archive path is used.
      *
@@ -210,6 +239,16 @@ class CloudBeesPlugin implements Plugin<Project> {
      * @return WAR file
      */
     private File getWarFile(Project project) {
-        project.hasProperty('warFile') ? new File(project.property('warFile')) : project.tasks.getByName(WarPlugin.WAR_TASK_NAME).archivePath
+        project.hasProperty('warFile') ? new File(project.property('warFile')) : getWarPluginArchive(project)
+    }
+
+    /**
+     * Gets the project's WAR file if War plugin is applied; otherwise return null.
+     *
+     * @param project Project
+     * @return WAR file
+     */
+    private File getWarPluginArchive(Project project) {
+         project.plugins.hasPlugin(WarPlugin) ? project.tasks.getByName(WarPlugin.WAR_TASK_NAME).archivePath : null
     }
 }

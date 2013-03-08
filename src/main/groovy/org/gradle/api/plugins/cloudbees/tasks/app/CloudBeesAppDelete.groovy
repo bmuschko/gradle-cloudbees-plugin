@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesAppDelete extends CloudBeesTask {
-    @Input String appId
+    /**
+     * Application identifier.
+     */
+    @Input
+    String appId
 
     CloudBeesAppDelete() {
         super('Deletes an application.')

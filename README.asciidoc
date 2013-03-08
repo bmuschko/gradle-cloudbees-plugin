@@ -42,27 +42,28 @@ The CloudBees plugin defines the following tasks:
 
 [options="header"]
 |=======
-|Task name |Depends on |Type |Description
-|`cloudBeesAppChecksums` |- |`CloudBeesAppChecksums` |Returns the checksums for an application.
-|`cloudBeesAppDelete` |- |`CloudBeesAppDelete` |Deletes an application.
-|`cloudBeesAppDeployWar` |- |`CloudBeesAppDeployWar` |Deploys a new version of an application using a WAR file.
-|`cloudBeesAppInfo` |- |`CloudBeesAppInfo` |Returns the basic information about an application.
-|`cloudBeesAppList` |- |`CloudBeesAppList` |Returns the list of applications available to your account.
-|`cloudBeesAppRestart` |- |`CloudBeesAppRestart` |Restarts all deployed instances of an application.
-|`cloudBeesAppStart` |- |`CloudBeesAppStart` |Starts all deployed instances of an application.
-|`cloudBeesAppStop` |- |`CloudBeesAppStop` |Stops all deployed instances of an application.
-|`cloudBeesAppTail` |- |`CloudBeesAppTail` |Establishes a persistent connection to the application logs.
+|Task name               |Depends on |Type                    |Description
+|`cloudBeesAppChecksums` |-          |`CloudBeesAppChecksums` |Returns the checksums for an application.
+|`cloudBeesAppDelete`    |-          |`CloudBeesAppDelete`    |Deletes an application.
+|`cloudBeesAppDeployEar` |-          |`CloudBeesAppDeployEar` |Deploys a new version of an application using a EAR file.
+|`cloudBeesAppDeployWar` |-          |`CloudBeesAppDeployWar` |Deploys a new version of an application using a WAR file.
+|`cloudBeesAppInfo`      |-          |`CloudBeesAppInfo`      |Returns the basic information about an application.
+|`cloudBeesAppList`      |-          |`CloudBeesAppList`      |Returns the list of applications available to your account.
+|`cloudBeesAppRestart`   |-          |`CloudBeesAppRestart`   |Restarts all deployed instances of an application.
+|`cloudBeesAppStart`     |-          |`CloudBeesAppStart`     |Starts all deployed instances of an application.
+|`cloudBeesAppStop`      |-          |`CloudBeesAppStop`      |Stops all deployed instances of an application.
+|`cloudBeesAppTail`      |-          |`CloudBeesAppTail`      |Establishes a persistent connection to the application logs.
 |=======
 
 === Database tasks
 
 [options="header"]
 |=======
-|Task name |Depends on |Type |Description
-|`cloudBeesDbCreate` |- |`CloudBeesDbCreate` |Creates a new database.
-|`cloudBeesDbDrop` |- |`CloudBeesDbDrop` |Drops a database.
-|`cloudBeesDbInfo` |- |`CloudBeesDbInfo` |Returns information about connecting to a database.
-|`cloudBeesDbList` |- |`CloudBeesDbList` |Returns a list of all the databases associated with your account.
+|Task name           |Depends on |Type                |Description
+|`cloudBeesDbCreate` |-          |`CloudBeesDbCreate` |Creates a new database.
+|`cloudBeesDbDrop`   |-          |`CloudBeesDbDrop`   |Drops a database.
+|`cloudBeesDbInfo`   |-          |`CloudBeesDbInfo`   |Returns information about connecting to a database.
+|`cloudBeesDbList`   |-          |`CloudBeesDbList`   |Returns a list of all the databases associated with your account.
 |=======
 
 == Convention properties
@@ -71,14 +72,14 @@ The CloudBees plugin defines the following convention properties in the `cloudBe
 
 [options="header"]
 |=======
-|Property name |Type |Default value |Description
-|`apiFormat` |String |`XML` |The CloudBees API format.
-|`apiVersion` |String |`1.0` |The CloudBees API version.
-|`apiUrl` |String |`https://api.cloudbees.com/api` |The CloudBees API URL.
-|`apiKey` |String |value of property named `cloudbees.api.key` |The CloudBees API key.
-|`secret` |String |value of property named `cloudbees.api.secret` |The CloudBees API secret.
-|`appId` |String |Not null |The application identifier on CloudBees.
-|`dbId` |String |Not null |The database identifier on CloudBees.
+|Property name |Type   |Default value                                  |Description
+|`apiFormat`   |String |`XML`                                          |The CloudBees API format.
+|`apiVersion`  |String |`1.0`                                          |The CloudBees API version.
+|`apiUrl`      |String |`https://api.cloudbees.com/api`                |The CloudBees API URL.
+|`apiKey`      |String |value of property named `cloudbees.api.key`    |The CloudBees API key.
+|`apiSecret`   |String |value of property named `cloudbees.api.secret` |The CloudBees API secret.
+|`appId`       |String |Not null                                       |The application identifier on CloudBees.
+|`dbId`        |String |Not null                                       |The database identifier on CloudBees.
 |=======
 
 === Example

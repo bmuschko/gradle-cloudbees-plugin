@@ -24,11 +24,11 @@ import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 
 /**
- * Deploys a new version of an application using a WAR file.
+ * Deploys a new version of an application using a EAR file.
  *
- * @author Benjamin Muschko
+ * @author benjamin
  */
-class CloudBeesAppDeployWar extends CloudBeesTask {
+class CloudBeesAppDeployEar extends CloudBeesTask {
     /**
      * Application identifier.
      */
@@ -42,17 +42,17 @@ class CloudBeesAppDeployWar extends CloudBeesTask {
     String environment
 
     /**
-     * Deployment message e.g. version number.
+     * Deployment message e.g. current version number.
      */
     @Input
     @Optional
     String message
 
     /**
-     * WAR file to deploy.
+     * EAR file to deploy.
      */
     @InputFile
-    File warFile
+    File earFile
 
     /**
      * Source file.
@@ -61,14 +61,14 @@ class CloudBeesAppDeployWar extends CloudBeesTask {
     @Optional
     File srcFile
 
-    CloudBeesAppDeployWar() {
-        super('Deploys a new version of an application using a WAR file.')
+    CloudBeesAppDeployEar() {
+        super('Deploys a new version of an application using an EAR file.')
     }
 
     @Override
     void executeAction(CloudBeesClient client) {
-        logger.quiet "Deploying WAR '${getWarFile()}' to application ID '${getAppId()}' with message '${getMessage()}'"
-        ApplicationDeployArchiveResponse response = client.applicationDeployWar(getAppId(), getEnvironment(), getMessage(), getWarFile(), getSrcFile(), new HashWriteProgress())
+        logger.quiet "Deploying EAR '${getEarFile()}' to application ID '${getAppId()}' with message '${getMessage()}'"
+        ApplicationDeployArchiveResponse response = client.applicationDeployEar(getAppId(), getEnvironment(), getMessage(), getEarFile(), getSrcFile(), new HashWriteProgress())
         logger.quiet "Application uploaded successfully to: $response.url"
     }
 }

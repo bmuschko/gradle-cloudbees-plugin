@@ -24,10 +24,10 @@ import com.cloudbees.api.BeesClient
  * @author benjamin
  */
 class CloudBeesHttpApiClient implements CloudBeesClient {
-	@Delegate
-	private BeesClient client
+    @Delegate
+    private BeesClient client
 
-    CloudBeesHttpApiClient(String apiUrl, String apiKey, String secret, String apiFormat, String apiVersion) {
-        client = new BeesClient(apiUrl, apiKey, secret, apiFormat, apiVersion)
+    CloudBeesHttpApiClient(String apiUrl, String apiKey, String apiSecret, String apiFormat, String apiVersion) {
+        client = new BeesClient(apiUrl, apiKey, apiSecret, apiFormat, apiVersion)
     }
 }

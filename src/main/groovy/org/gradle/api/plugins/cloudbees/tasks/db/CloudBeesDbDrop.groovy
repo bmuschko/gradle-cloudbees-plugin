@@ -26,7 +26,11 @@ import org.gradle.api.tasks.Input
  * @author Benjamin Muschko
  */
 class CloudBeesDbDrop extends CloudBeesTask {
-    @Input String dbId
+    /**
+     * Database identifier.
+     */
+    @Input
+    String dbId
 
     CloudBeesDbDrop() {
         super('Drops a database.')

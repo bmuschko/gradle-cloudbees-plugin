@@ -25,6 +25,7 @@ import com.cloudbees.api.*
 interface CloudBeesClient {
     ApplicationCheckSumsResponse applicationCheckSums(String appId)
     ApplicationDeleteResponse applicationDelete(String appId)
+    ApplicationDeployArchiveResponse applicationDeployEar(String appId, String environment, String description, File earFile, File srcFile, UploadProgress progress)
     ApplicationDeployArchiveResponse applicationDeployWar(String appId, String environment, String description, File warFile, File srcFile, UploadProgress progress)
     ApplicationInfo applicationInfo(String appId)
     ApplicationListResponse applicationList()
