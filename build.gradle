@@ -1,6 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
-//apply plugin: 'nexus'
+apply plugin: 'nexus'
 apply plugin: 'maven'
 
 group = 'org.gradle.api.plugins'
@@ -56,7 +56,7 @@ idea.project {
 task wrapper(type: Wrapper) {
     gradleVersion = '1.4'
 }
-/*
+
 modifyPom {
     project {
         name 'Gradle CloudBees plugin'
@@ -86,12 +86,4 @@ modifyPom {
             }
         }
     }
-}*/
-
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			repository(url: "file://$projectDir/../repo")
-		}
-	}
 }
