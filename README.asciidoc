@@ -90,6 +90,8 @@ cloudBees {
     appId = 'gradle-in-action/to-do-app'
     dbId = 'gradle-in-action/to-do-db'
 }
+
+cloudBeesAppDeployWar.message = project.version
 ----
 
 == Setting API credentials
