@@ -18,7 +18,6 @@ package org.gradle.api.plugins.cloudbees
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.WarPlugin
-import org.gradle.api.plugins.cloudbees.client.DefaultHttpApiConfig
 import org.gradle.api.plugins.cloudbees.tasks.CloudBeesTask
 import org.gradle.api.plugins.cloudbees.tasks.app.*
 import org.gradle.api.plugins.cloudbees.tasks.db.CloudBeesDbCreate
@@ -90,6 +89,7 @@ class CloudBeesPlugin implements Plugin<Project> {
 
         project.tasks.withType(CloudBeesAppDeployEar).whenTaskAdded { task ->
             task.conventionMapping.appId = { getAppId(project) }
+            task.conventionMapping.environment = { project.hasProperty('environment') ? project.environment : null }
             task.conventionMapping.message = { project.hasProperty('message') ? project.message : null }
             task.conventionMapping.earFile = { getEarFile(project) }
         }
@@ -98,6 +98,7 @@ class CloudBeesPlugin implements Plugin<Project> {
 
         project.tasks.withType(CloudBeesAppDeployWar).whenTaskAdded { task ->
             task.conventionMapping.appId = { getAppId(project) }
+            task.conventionMapping.environment = { project.hasProperty('environment') ? project.environment : null }
             task.conventionMapping.message = { project.hasProperty('message') ? project.message : null }
             task.conventionMapping.warFile = { getWarFile(project) }
         }

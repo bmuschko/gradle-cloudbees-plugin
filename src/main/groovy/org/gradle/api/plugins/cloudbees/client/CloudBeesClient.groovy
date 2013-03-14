@@ -22,7 +22,8 @@ import com.cloudbees.api.*
  *
  * @author benjamin
  */
-interface CloudBeesClient {
+interface CloudBeesClient<T> {
+    void setConfiguration(T configuration)
     ApplicationCheckSumsResponse applicationCheckSums(String appId)
     ApplicationDeleteResponse applicationDelete(String appId)
     ApplicationDeployArchiveResponse applicationDeployEar(String appId, String environment, String description, File earFile, File srcFile, UploadProgress progress)

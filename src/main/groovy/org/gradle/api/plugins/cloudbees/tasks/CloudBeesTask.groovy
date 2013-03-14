@@ -19,6 +19,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.plugins.cloudbees.client.CloudBeesClient
 import org.gradle.api.plugins.cloudbees.client.CloudBeesHttpApiClient
+import org.gradle.api.plugins.cloudbees.client.CloudBeesHttpApiConfiguration
 import org.gradle.api.plugins.cloudbees.client.DefaultHttpApiConfig
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
@@ -65,12 +66,13 @@ abstract class CloudBeesTask extends DefaultTask {
     CloudBeesTask(String description) {
         this.description = description
         group = 'CloudBees'
-        client = new CloudBeesHttpApiClient(getApiUrl(), getApiKey(), getApiSecret(), getApiFormat(), getApiVersion())
+        client = new CloudBeesHttpApiClient()
     }
 
     @TaskAction
     void start() {
         withExceptionHandling {
+            client.setConfiguration(buildConfiguration())
             executeAction(client)
         }
     }
@@ -80,8 +82,12 @@ abstract class CloudBeesTask extends DefaultTask {
             c()
         }
         catch(Exception e) {
-            throw new GradleException('Failed to executed CloudBees task', e)
+            throw new GradleException('Failed to execute CloudBees task', e)
         }
+    }
+
+    CloudBeesHttpApiConfiguration buildConfiguration() {
+        new CloudBeesHttpApiConfiguration(getApiUrl(), getApiKey(), getApiSecret(), getApiFormat(), getApiVersion())
     }
 
     abstract void executeAction(CloudBeesClient client)

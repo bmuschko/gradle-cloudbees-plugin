@@ -39,6 +39,7 @@ class CloudBeesAppDeployEar extends CloudBeesTask {
      * CloudBees environment to deploy WAR file to.
      */
     @Input
+    @Optional
     String environment
 
     /**

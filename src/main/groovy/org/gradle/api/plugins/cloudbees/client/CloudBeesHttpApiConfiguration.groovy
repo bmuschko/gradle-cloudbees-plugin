@@ -15,20 +15,23 @@
  */
 package org.gradle.api.plugins.cloudbees.client
 
-import com.cloudbees.api.BeesClient
-
 /**
- * CloudBees HTTP API client. As BeesClient doesn't have an interface we will use it
- * as a delegate.
+ * CloudBees Http API configuration.
  *
  * @author benjamin
  */
-class CloudBeesHttpApiClient implements CloudBeesClient<CloudBeesHttpApiConfiguration> {
-    @Delegate
-    private BeesClient client
+class CloudBeesHttpApiConfiguration {
+    final String apiUrl
+    final String apiKey
+    final String apiSecret
+    final String apiFormat
+    final String apiVersion
 
-    @Override
-    void setConfiguration(CloudBeesHttpApiConfiguration configuration) {
-        client = new BeesClient(configuration.apiUrl, configuration.apiKey, configuration.apiSecret, configuration.apiFormat, configuration.apiVersion)
+    CloudBeesHttpApiConfiguration(String apiUrl, String apiKey, String apiSecret, String apiFormat, String apiVersion) {
+        this.apiUrl = apiUrl
+        this.apiKey = apiKey
+        this.apiSecret = apiSecret
+        this.apiFormat = apiFormat
+        this.apiVersion = apiVersion
     }
 }
