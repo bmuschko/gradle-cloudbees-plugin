@@ -72,7 +72,7 @@ abstract class CloudBeesTask extends DefaultTask {
     @TaskAction
     void start() {
         withExceptionHandling {
-            client.setConfiguration(buildConfiguration())
+            client.setConfiguration(new CloudBeesHttpApiConfiguration(getApiUrl(), getApiKey(), getApiSecret(), getApiFormat(), getApiVersion()))
             executeAction(client)
         }
     }
@@ -84,10 +84,6 @@ abstract class CloudBeesTask extends DefaultTask {
         catch(Exception e) {
             throw new GradleException('Failed to execute CloudBees task', e)
         }
-    }
-
-    CloudBeesHttpApiConfiguration buildConfiguration() {
-        new CloudBeesHttpApiConfiguration(getApiUrl(), getApiKey(), getApiSecret(), getApiFormat(), getApiVersion())
     }
 
     abstract void executeAction(CloudBeesClient client)
