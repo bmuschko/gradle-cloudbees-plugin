@@ -43,16 +43,16 @@ The CloudBees plugin defines the following tasks:
 [options="header"]
 |=======
 |Task name               |Depends on |Type                    |Description
-|`cloudBeesAppChecksums` |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppChecksums.html[CloudBeesAppChecksums] |Returns the checksums for an application.
-|`cloudBeesAppDelete`    |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppDelete.html[CloudBeesAppDelete] |Deletes an application.
-|`cloudBeesAppDeployEar` |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppDeployEar.html[CloudBeesAppDeployEar] |Deploys a new version of an application using a EAR file.
-|`cloudBeesAppDeployWar` |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppDeployWar.html[CloudBeesAppDeployWar] |Deploys a new version of an application using a WAR file.
-|`cloudBeesAppInfo`      |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppInfo.html[CloudBeesAppInfo] |Returns the basic information about an application.
-|`cloudBeesAppList`      |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppList.html[CloudBeesAppList] |Returns the list of applications available to your account.
-|`cloudBeesAppRestart`   |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppRestart.html[CloudBeesAppRestart] |Restarts all deployed instances of an application.
-|`cloudBeesAppStart`     |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppStart.html[CloudBeesAppStart] |Starts all deployed instances of an application.
-|`cloudBeesAppStop`      |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppStop.html[CloudBeesAppStop] |Stops all deployed instances of an application.
-|`cloudBeesAppTail`      |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/app/CloudBeesAppTail.html[CloudBeesAppTail] |Establishes a persistent connection to the application logs.
+|`cloudBeesAppChecksums` |-          |CloudBeesAppChecksums   |Returns the checksums for an application.
+|`cloudBeesAppDelete`    |-          |CloudBeesAppDelete      |Deletes an application.
+|`cloudBeesAppDeployEar` |-          |CloudBeesAppDeployEar   |Deploys a new version of an application using a EAR file.
+|`cloudBeesAppDeployWar` |-          |CloudBeesAppDeployWar   |Deploys a new version of an application using a WAR file.
+|`cloudBeesAppInfo`      |-          |CloudBeesAppInfo        |Returns the basic information about an application.
+|`cloudBeesAppList`      |-          |CloudBeesAppList        |Returns the list of applications available to your account.
+|`cloudBeesAppRestart`   |-          |CloudBeesAppRestart     |Restarts all deployed instances of an application.
+|`cloudBeesAppStart`     |-          |CloudBeesAppStart       |Starts all deployed instances of an application.
+|`cloudBeesAppStop`      |-          |CloudBeesAppStop        |Stops all deployed instances of an application.
+|`cloudBeesAppTail`      |-          |CloudBeesAppTail        |Establishes a persistent connection to the application logs.
 |=======
 
 === Database tasks
@@ -60,10 +60,10 @@ The CloudBees plugin defines the following tasks:
 [options="header"]
 |=======
 |Task name           |Depends on |Type                |Description
-|`cloudBeesDbCreate` |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/db/CloudBeesDbCreate.html[CloudBeesDbCreate] |Creates a new database.
-|`cloudBeesDbDrop`   |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/db/CloudBeesDbDrop.html[CloudBeesDbDrop] |Drops a database.
-|`cloudBeesDbInfo`   |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/db/CloudBeesDbInfo.html[CloudBeesDbInfo] |Returns information about connecting to a database.
-|`cloudBeesDbList`   |-          |link:https://bmuschko.ci.cloudbees.com/job/gradle-cloudbees-plugin/javadoc/org/gradle/api/plugins/cloudbees/tasks/db/CloudBeesDbList.html[CloudBeesDbList] |Returns a list of all the databases associated with your account.
+|`cloudBeesDbCreate` |-          |CloudBeesDbCreate   |Creates a new database.
+|`cloudBeesDbDrop`   |-          |CloudBeesDbDrop     |Drops a database.
+|`cloudBeesDbInfo`   |-          |CloudBeesDbInfo     |Returns information about connecting to a database.
+|`cloudBeesDbList`   |-          |CloudBeesDbList     |Returns a list of all the databases associated with your account.
 |=======
 
 == Extension properties
