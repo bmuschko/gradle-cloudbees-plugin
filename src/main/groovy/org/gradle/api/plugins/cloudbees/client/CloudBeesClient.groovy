@@ -28,6 +28,7 @@ interface CloudBeesClient<T> {
     ApplicationDeleteResponse applicationDelete(String appId)
     ApplicationDeployArchiveResponse applicationDeployEar(String appId, String environment, String description, File earFile, File srcFile, UploadProgress progress)
     ApplicationDeployArchiveResponse applicationDeployWar(String appId, String environment, String description, File warFile, File srcFile, UploadProgress progress)
+    ApplicationDeployArchiveResponse applicationDeployArchive(String appId, String environment, String description, File archiveFile, File srcFile, String archiveType, boolean deltaDeploy, Map<String, String> parameters, UploadProgress progress)
     ApplicationInfo applicationInfo(String appId)
     ApplicationListResponse applicationList()
     ApplicationRestartResponse applicationRestart(String appId)

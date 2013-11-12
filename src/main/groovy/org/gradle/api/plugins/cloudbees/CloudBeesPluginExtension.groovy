@@ -57,4 +57,24 @@ class CloudBeesPluginExtension {
      * Database identifier.
      */
     String dbId
+
+    /**
+     * Archive Type.
+     */
+    String archiveType = 'zip'
+
+    /**
+     * Archive File to upload with deployArchive task
+     */
+    File archiveFile
+
+    /**
+     * deltaDeploy
+     */
+    boolean deltaDeploy = false
+
+    /**
+     * Parameters (e.g. [containerType: "java"])
+     */
+    Map<String, String> parameters = null
 }
