@@ -4,7 +4,7 @@ Gradle CloudBees plugin
 image:https://jenkins-ci.org/sites/default/files/images/CloudBees-logo.thumbnail.png[CloudBees Logo]
 
 |=======
-|The development of this plugin has been taken over by CloudBees. Please refer to its new GitHub repository <a href="https://github.com/CloudBees-community/gradle-cloudbees-plugin">CloudBees-community/gradle-cloudbees-plugin</a>. Development on this repository is discontinued.|
+|The development of this plugin has been taken over by CloudBees. Please refer to its new GitHub repository link:https://github.com/CloudBees-community/gradle-cloudbees-plugin[CloudBees-community/gradle-cloudbees-plugin]. Development on this repository is discontinued.
 |=======
 
 The plugin provides support for managing applications and databases on link:http://www.cloudbees.com/run.cb[CloudBees RUN@cloud].
