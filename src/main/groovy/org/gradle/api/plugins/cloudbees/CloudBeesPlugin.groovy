@@ -105,6 +105,18 @@ class CloudBeesPlugin implements Plugin<Project> {
 
         project.task('cloudBeesAppDeployWar', type: CloudBeesAppDeployWar)
 
+        project.tasks.withType(CloudBeesAppDeployArchive).whenTaskAdded { task ->
+            task.conventionMapping.appId = { getAppId(project) }
+            task.conventionMapping.environment = { project.hasProperty('environment') ? project.environment : null }
+            task.conventionMapping.message = { project.hasProperty('message') ? project.message : null }
+            task.conventionMapping.archiveFile = { getArchiveFile(project) }
+            task.conventionMapping.archiveType = { getArchiveType(project) }
+            task.conventionMapping.deltaDeploy = { getDeltaDeploy(project) }
+            task.conventionMapping.parameters = { getParameters(project) }
+        }
+
+        project.task('cloudBeesAppDeployArchive', type: CloudBeesAppDeployArchive)
+
         project.tasks.withType(CloudBeesAppInfo).whenTaskAdded { task ->
             task.conventionMapping.appId = { getAppId(project) }
         }
@@ -251,5 +263,46 @@ class CloudBeesPlugin implements Plugin<Project> {
      */
     private File getWarPluginArchive(Project project) {
          project.plugins.hasPlugin(WarPlugin) ? project.tasks.getByName(WarPlugin.WAR_TASK_NAME).archivePath : null
+    }
+
+    /**
+     * Gets archive path from project property "archiveFile". If the property doesn't exist
+     * the extension's value is used.
+     *
+     * @param project
+     * @return Archive file
+     */
+    private File getArchiveFile(Project project) {
+        project.hasProperty('archiveFile') ? new File(project.property('archiveFile')) : project.extensions.findByName(EXTENSION_NAME).archiveFile
+    }
+
+    /**
+     * Gets archive type from the extension.
+     *
+     * @param project
+     * @return Archive type
+     */
+    private String getArchiveType(Project project) {
+        project.extensions.findByName(EXTENSION_NAME).archiveType
+    }
+
+    /**
+     * Gets parameters from extension
+     *
+     * @param project
+     * @return Archive type
+     */
+    private boolean getDeltaDeploy(Project project) {
+        project.extensions.findByName(EXTENSION_NAME).deltaDeploy
+    }
+
+    /**
+     * Gets parameters from extension
+     *
+     * @param project
+     * @return Archive type
+     */
+    private Map<String, String> getParameters(Project project) {
+        project.extensions.findByName(EXTENSION_NAME).parameters
     }
 }

@@ -49,6 +49,7 @@ The CloudBees plugin defines the following tasks:
 |Task name               |Depends on |Type                    |Description
 |`cloudBeesAppChecksums` |-          |CloudBeesAppChecksums   |Returns the checksums for an application.
 |`cloudBeesAppDelete`    |-          |CloudBeesAppDelete      |Deletes an application.
+|`cloudBeesAppDeployArchive` |-      |CloudBeesAppDeployArchive   |Deploys a new version of an application using an archive file of specified type.
 |`cloudBeesAppDeployEar` |-          |CloudBeesAppDeployEar   |Deploys a new version of an application using a EAR file.
 |`cloudBeesAppDeployWar` |-          |CloudBeesAppDeployWar   |Deploys a new version of an application using a WAR file.
 |`cloudBeesAppInfo`      |-          |CloudBeesAppInfo        |Returns the basic information about an application.
@@ -86,6 +87,21 @@ The CloudBees plugin defines the following extension properties in the `cloudBee
 |`dbId`        |String |Not null                                       |The database identifier on CloudBees.
 |=======
 
+The CloudBeesAppDeployArchive uses the following additional properties in the `cloudBees` closure:
+
+[options="header"]
+|=======
+|Property name |Type                |Default value                     |Description
+|`archiveType` |String              |`zip`                             |The file type of the archive.
+|`archiveFile` |File                |`null`                            |The archive file to upload (Required).
+|`deltaDeploy` |boolean             |`false`                           |Whether to use delta for upload.
+|`parameters`  |Map<String, String> |`null`                            |CloudBees Application and Runtime Parameters.
+|=======
+
+Note:: CloudBees runtime parameters should prepend the String `runtime.` to the key, e.g. `runtime.classpath`.
+
+Warning:: The `deltaDeploy` option has not been tested. Use at your own risk.
+
 === Example
 
 [source,groovy]
@@ -96,6 +112,26 @@ cloudBees {
 }
 
 cloudBeesAppDeployWar.message = project.version
+----
+
+=== Example: Spring Boot
+
+[source,groovy]
+----
+
+def springBootJarLauncherClassName = "org.springframework.boot.loader.JarLauncher"
+def springBootJarFile = file("build/libs/gs-spring-boot-0.1.0.jar")
+
+cloudBees {
+    appId = 'gradle-in-action/to-do-app'
+    dbId = 'gradle-in-action/to-do-db'
+    archiveType = 'jar'
+    archiveFile = springBootJarFile
+    parameters = [containerType: "java", 'runtime.class': springBootJarLauncherClassName, 'runtime.classpath': '']
+}
+
+cloudBeesAppDeployArchive.message = project.version
+cloudBeesAppDeployArchive.dependsOn assemble
 ----
 
 == Setting API credentials

@@ -4,7 +4,7 @@ apply plugin: 'nexus'
 apply plugin: 'maven'
 
 group = 'org.gradle.api.plugins'
-version = '0.1'
+version = '0.1.1-SNAPSHOT'
 
 buildscript {
     repositories {
